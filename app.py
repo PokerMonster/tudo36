@@ -27,6 +27,10 @@ class Application(tornado.web.Application):
         super().__init__(handlers, **settings)
 
 
+def newfunc():
+    pass
+
+
 if __name__ == '__main__':
     tornado.options.parse_command_line()
     application = Application(debug=options.debug)
