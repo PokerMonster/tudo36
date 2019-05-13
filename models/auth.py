@@ -15,7 +15,7 @@ class User(Base):
     name = Column(String(50), unique=True, nullable=False)
     password = Column(String(50))
     creatime = Column(DateTime, default=datetime.now)
-    # email = Column(String(80))
+    email = Column(String(80))
 
     def __repr__(self):
         return "<User:#{}-{}>".format(self.id, self.name)
