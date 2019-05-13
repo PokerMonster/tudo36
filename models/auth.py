@@ -35,5 +35,10 @@ class Post(Base):
         return "<Post:#{}>".format(self.id)
 
 
+def register(username, password):
+    s = Session()
+    s.add(User(name=username, password=password))
+    s.commit()
+
 if __name__ == '__main__':
     Base.metadata.create_all()
