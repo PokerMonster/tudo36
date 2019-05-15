@@ -23,13 +23,26 @@ class Application(tornado.web.Application):
             debug=debug,
             template_path='templates',
             static_path='statics',
+            cookie_secret="skrjarjasjrasdfksj",
+            login_url='/login',
+            # xsrf_cookies=True,
+            pycket={
+                'engine': 'redis',
+                'storage': {
+                    'host': 'localhost',
+                    'port': 6379,
+                    # 'password': '',
+                    'db_sessions': 5,  # redis db index
+                    # 'db_notifications': 11,
+                    'max_connections': 2 ** 30,
+                },
+                'cookies': {
+                    'expires_days': 30,
+                },
+            }
         )
 
         super().__init__(handlers, **settings)
-
-
-def newfunc():
-    pass
 
 
 if __name__ == '__main__':
