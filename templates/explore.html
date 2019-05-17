@@ -5,6 +5,7 @@
 
 {% block body %}
 explore page <br>
-<img src="{{ static_url('upload/4.jpg') }}" />
-
+{% for p in posts %}
+<img src="{{ static_url(p.thumb_url) }}" />
+{% end %}
 {% end %}
