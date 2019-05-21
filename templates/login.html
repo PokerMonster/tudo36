@@ -4,8 +4,14 @@
 
 
 {% block body %}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-6 col-4 text-center">
+
 {% if msg %}
-Error: {{ msg }}
+    <div class="alert alert-danger" role="alert">
+        Error: {{ msg }}
+    </div>
 {% end %}
 
 <form action="/login" enctype="multipart/form-data" method="post">
@@ -22,7 +28,9 @@ Error: {{ msg }}
       </div>
         <input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="password">    </div>
 
-    <button type="button" class="btn btn-primary">提交</button>
+    <button type="submit" class="btn btn-lg btn-primary">提交</button>
 
 </form>
+    </div>
+</div>
 {% end %}
