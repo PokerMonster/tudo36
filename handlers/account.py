@@ -43,3 +43,9 @@ class LoginHanlder(BaseHandler):
                     self.redirect('/')
             else:
                 self.redirect('/login?msg=password error')
+
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        self.session.delete("tudo_user")
+        self.render('logout.html')
