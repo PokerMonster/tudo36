@@ -15,9 +15,9 @@ class RegisterHandler(BaseHandler):
         password2 = self.get_argument('password2', '')
 
         if username and password1 and (password1 == password2):
-            register(username, password1)
+            self.orm.register(username, password1)
             self.session.set('tudo_user', username)
-            self.write('signup ok')
+            self.redirect('/')
         else:
             self.write('bad username/password')
 
