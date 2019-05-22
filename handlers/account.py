@@ -1,7 +1,5 @@
-import tornado.web
-
 from .main import BaseHandler
-from utils.account import authenticate, register
+from utils.account import authenticate
 
 
 class RegisterHandler(BaseHandler):
