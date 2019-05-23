@@ -49,7 +49,8 @@ class PostHanlder(BaseHandler):
         if not post:
             self.write('wrong id {}'.format(post_id))
         else:
-            self.render('post.html', post=post)
+            count = self.orm.count_like_for(post_id)
+            self.render('post.html', post=post, count=count)
 
 
 class ProfileHandler(BaseHandler):
@@ -58,8 +59,15 @@ class ProfileHandler(BaseHandler):
     """
     @tornado.web.authenticated
     def get(self):
-        user = self.orm.get_user(self.current_user)
-        self.render('profile.html', user=user, like_posts=[])
+        name = self.get_argument('name', None)
+        if not name:
+            name = self.current_user
+        user = self.orm.get_user(name)
+        if user:
+            like_posts = self.orm.like_posts_for(name)
+            self.render('profile.html', user=user, like_posts=like_posts)
+        else:
+            self.write('user error')
 
 
 class UploadHandler(BaseHandler):
@@ -80,3 +88,10 @@ class UploadHandler(BaseHandler):
                                         self.current_user)
 
         self.redirect('/post/{}'.format(post_id))
+
+
+class LikeH(BaseHandler):
+    def post(self):
+
+        post_id = self.get_argument('post_id', '')
+        print(post_id)

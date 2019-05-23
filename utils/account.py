@@ -1,6 +1,6 @@
 import hashlib
 
-from models.auth import User, Post
+from models.auth import User, Post, Like
 
 
 def hashed(text):
@@ -60,3 +60,19 @@ class HandlerORM:
         """
         post = self.db.query(Post).filter_by(id=post_id).first()
         return post
+
+    def like_posts_for(self, username):
+        """
+        查询用户喜欢的 posts
+        :param username:
+        :return:
+        """
+        user = self.get_user(username)
+        posts = self.db.query(Post).filter(Post.id == Like.post_id,
+                                           Like.user_id == user.id,
+                                           Post.user_id != user.id)
+        return posts
+
+    def count_like_for(self, post_id):
+        count = self.db.query(Like).filter_by(post_id=post_id).count()
+        return count
