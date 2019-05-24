@@ -88,10 +88,3 @@ class UploadHandler(BaseHandler):
                                         self.current_user)
 
         self.redirect('/post/{}'.format(post_id))
-
-
-class LikeH(BaseHandler):
-    def post(self):
-
-        post_id = self.get_argument('post_id', '')
-        print(post_id)
